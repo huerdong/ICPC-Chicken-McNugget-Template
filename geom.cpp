@@ -391,6 +391,21 @@ bool equals(long double a, long double b) {
 
 int main() {
     
-    
-    
+    // Finds both circles from two points and radius
+    line pb = line(p[i], p[j]).perpendicularBisector();
+    point midpoint = (p[i] + p[j]) / 2;
+    long double len = midpoint.dist(p[i]);
+    if (len > r) continue;
+    for (int k = -1; k < 2; k++) {
+        if (k == 0) continue;
+        point x = pb.shift(midpoint, sqrt(r * r - len * len), k);
+        long long cnt = 2;
+        for (int l = 0; l < n; l++) {
+            if (x.dist(p[l]) - MAGIC > r || l == i || l == j) {
+            } else {
+                cnt++;
+            }
+        }
+        res = max(res, cnt);
+    }
 }
