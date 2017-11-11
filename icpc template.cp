@@ -513,3 +513,39 @@ int lcs( char *X, char *Y, int m, int n )
     /* L[m][n] contains length of LCS for X[0..n-1] and Y[0..m-1] */
     return L[m][n];
 }
+
+//totient
+void phi(int n) {
+    //Sieve of eratosthenes
+    vector<int> sieve;
+    sieve.push_back(2);
+    for (int i = 3; i < n; ++i) {
+        bool flag = true;
+        for (int j = 0; sieve[j] * sieve[j] <= i; ++j) {
+	    if (i % sieve[j] == 0) {
+                flag = false;
+                break;
+            }
+	}
+        if (flag) sieve.push_back(i);
+    }
+
+    //dp
+    int phi[n+1];
+    memset(phi, 0, n+1);
+    phi[1] = 0
+    for (int p: sieve) {
+        phi[p] = p - 1;
+    }
+    for (int i = 4; i <= n+1; ++i) {
+        int a, b;
+        for (int j = 0; sieve[j] * sieve[j] <= i; ++j) {
+	    if (i % sieve[j] == 0) {
+                a = sieve[j];
+		b = i / sieve[j];
+                break;
+            }
+        }
+        phi[i] = phi[a] * phi[b];
+    }      
+}
